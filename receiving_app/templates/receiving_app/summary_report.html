@@ -1,1 +1,26 @@
-<h1>Hello</h1>
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}
+RELEASED ITEM FORM
+{% endblock title %}
+
+
+{% block content %}
+<div class="container">
+<div class="card card-body mt-5 mb-5 pb-4 shadow fade show">
+
+
+    {% for record in records %}
+
+    {{ record.employee_id }}
+
+    {% endfor %}
+
+</div>
+</div>
+
+
+
+{% endblock %}

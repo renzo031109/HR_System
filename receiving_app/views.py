@@ -2,9 +2,16 @@ from django.shortcuts import render
 from .models import Staff_Record, Client, Department
 from .forms import ReceivedFormSet
 
+
+
 # Create your views here.
 def summary_released(request):
+    report = Staff_Record.objects.all()
+    context = {'report': report}
+    return render(request, 'receiving_app/summary_report.html', context)
 
+
+def add_record(request):
     if request.method == 'POST':
         formset = ReceivedFormSet(request.POST)
         #check the validity of form
@@ -34,6 +41,6 @@ def summary_released(request):
     else:
         formset = ReceivedFormSet()
 
-    context = {'formset': 'formset'}
+    context = {'formset': formset}
     return render(request, 'receiving_app/add_record.html', context)
  

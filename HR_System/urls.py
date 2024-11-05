@@ -20,5 +20,6 @@ from receiving_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('summary_received/', views.summary_released, name='summary_received'),
+    path('', views.summary_released, name='summary_received'),
+    path('add_record/', views.add_record, name='add_record'),
 ]
