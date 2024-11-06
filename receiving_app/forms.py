@@ -13,7 +13,8 @@ class ReceivedForm(forms.ModelForm):
             'last_name',
             'first_name',
             'department',
-            'client'
+            'client',
+            'component'
         ]
 
         labels = {
@@ -21,7 +22,8 @@ class ReceivedForm(forms.ModelForm):
             'last_name' : 'LAST NAME',
             'first_name' : 'FIRST NAME',
             'department' : 'DEPARTMENT',
-            'client' : 'CLIENT'
+            'client' : 'CLIENT',
+            'component' : 'ITEM'
         }
 
         widgets = {
@@ -48,9 +50,13 @@ class ReceivedForm(forms.ModelForm):
             'client': forms.Select(attrs={
                 'class':'form-control', 
             }),
+            'component': forms.Select(attrs={
+                'class':'form-control', 
+            }),
+
 
         }
 
 # modelformset functions
-ReceivedFormSet = modelformset_factory(Staff_Record, form=ReceivedForm, extra=1) 
+ReceivedModelFormSet = modelformset_factory(Staff_Record, form=ReceivedForm, extra=1) 
 

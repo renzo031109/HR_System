@@ -30,6 +30,21 @@ class Client(models.Model):
         self.client = self.client.upper()
         super(Client, self).save()  
 
+
+class Component(models.Model):
+    component = models.CharField(max_length=200)
+
+    class Meta:
+        ordering = ["component"]
+
+    def __str__(self):
+        return self.component
+    
+    #save input to uppercase
+    def save(self):
+        self.component = self.component.upper()
+        super(Component, self).save()
+
         
 
 class Staff_Record(models.Model):
@@ -38,6 +53,7 @@ class Staff_Record(models.Model):
     first_name = models.CharField(max_length=200)
     department = models.ForeignKey(Department, on_delete=models.CASCADE)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    component = models.ForeignKey(Component, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ["last_name"]

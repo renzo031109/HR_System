@@ -26,10 +26,11 @@ RELEASED ITEM FORM
           {{ form.employee_id.label_tag }}
           {{ form.employee_id}}
         </div>
+        <div class="col">
+          
+        </div>
       </div>
-      <br>
-      <div class="border px-3 pb-3 pt-2">
-      <div class="get-item-title mb-2"><center><p>LOCATION AND DETAILS</p></center></div>
+
       <div class="row">
         <div class="col">
           <p></p>
@@ -39,24 +40,59 @@ RELEASED ITEM FORM
         <div class="col">
           <p></p>
           {{ form.first_name.label_tag }}
-          {{ form.first_name.floor }}
+          {{ form.first_name }}
         </div>
       </div>
+      
       <div class="row">
+        <div class="col">
+          <p></p>
+          {{ form.client.label_tag }}
+          {{ form.client }}
+        </div>
         <div class="col">
           <p></p>
           {{ form.department.label_tag }}
           {{ form.department }}
         </div>
+        <div class="col">
+          <p></p>
+          {{ form.component.label_tag }}
+          {{ form.component }}
+        </div>
       </div>
-      </div>
+
         {% endfor %}
       
         <br> 
 
-      
-          
+      <div class="row">
+          <table class="table table-bordered table-hover mt-4">
+              <thead>
 
+                <tr>
+            
+                    <th scope="col" style="width:90%"><strong>Item Name </strong><i style="font-size:10px">(Item | Brand (uom) - site) </i></th>
+                    <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody class="form-row spacer">
+                  {% for item in formset %}
+                  <tr> 
+                  
+                    <td>{{ item.component}}</td>
+                    
+                    <td><center><button type="button" class="btn btn-success add-form-row">+</button></center></td>
+                    
+                  </tr>
+                  
+                  {% endfor %}
+                  
+              </tbody>
+          </table>
+      </div> 
+
+      
       <button type="submit" class="btn btn-success" id="submitbtnget">
         <span class="spinner-border spinner-border-sm" id="spinner" role="status" aria-hidden="true"></span> 
         SUBMIT
