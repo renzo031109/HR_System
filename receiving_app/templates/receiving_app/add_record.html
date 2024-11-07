@@ -55,11 +55,6 @@ RELEASED ITEM FORM
           {{ form.department.label_tag }}
           {{ form.department }}
         </div>
-        <div class="col">
-          <p></p>
-          {{ form.component.label_tag }}
-          {{ form.component }}
-        </div>
       </div>
 
         {% endfor %}
@@ -69,10 +64,8 @@ RELEASED ITEM FORM
       <div class="row">
           <table class="table table-bordered table-hover mt-4">
               <thead>
-
-                <tr>
-            
-                    <th scope="col" style="width:90%"><strong>Item Name </strong><i style="font-size:10px">(Item | Brand (uom) - site) </i></th>
+                <tr>           
+                    <th scope="col" style="width:90%"><strong>I have received the following from the HR Department: </strong></th>
                     <th scope="col"></th>
                 </tr>
               </thead>
@@ -103,6 +96,7 @@ RELEASED ITEM FORM
 </div>
 </div>
 
-
+<!-- Call the script for the formset -->
+{% include 'receiving_app/form_script.html' %}
 
 {% endblock %}

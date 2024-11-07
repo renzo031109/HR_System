@@ -1,0 +1,82 @@
+{% block custom_js %}
+
+<script type="text/javascript">
+
+    // In your Javascript (external .js resource or <script> tag)
+    function updateElementIndex(el, prefix, ndx) {
+        const id_regex = new RegExp('(' + prefix + '-\\d+)');
+        const replacement = prefix + '-' + ndx;
+        if (el.getAttribute("for")) el.setAttribute("for", el.getAttribute("for").replace(id_regex, replacement));
+        if (el.id) el.id = el.id.replace(id_regex, replacement);
+        if (el.name) el.name = el.name.replace(id_regex, replacement);
+    }
+    
+    function cloneMore(selector, prefix) {
+        const newElement = document.querySelector(selector).cloneNode(true);
+        let total = parseInt(document.getElementById('id_' + prefix + '-TOTAL_FORMS').value);
+    
+        newElement.querySelectorAll('input:not([type=button]):not([type=submit]):not([type=reset])').forEach(function(input) {
+            let name = input.getAttribute('name');
+            if (name) {
+                name = name.replace('-' + (total - 1) + '-', '-' + total + '-');
+                const id = 'id_' + name;
+                input.setAttribute('name', name);
+                input.setAttribute('id', id);
+                input.value = '';
+                input.removeAttribute('checked');
+            }
+        });
+    
+        newElement.querySelectorAll('label').forEach(function(label) {
+            let forValue = label.getAttribute('for');
+            if (forValue) {
+                forValue = forValue.replace('-' + (total - 1) + '-', '-' + total + '-');
+                label.setAttribute('for', forValue);
+            }
+        });
+    
+        total++;
+        document.getElementById('id_' + prefix + '-TOTAL_FORMS').value = total;
+        document.querySelector(selector).after(newElement);
+    
+        const conditionRows = document.querySelectorAll('.form-row:not(:last-child)');
+        conditionRows.forEach(function(row) {
+            const addButton = row.querySelector('.btn.add-form-row');
+            if (addButton) {
+                addButton.classList.remove('btn-success');
+                addButton.classList.add('btn-danger', 'remove-form-row');
+                addButton.classList.remove('add-form-row');
+                addButton.innerHTML = '-';
+            }
+        });
+        return false;
+    }
+    
+    function deleteForm(prefix, btn) {
+        let total = parseInt(document.getElementById('id_' + prefix + '-TOTAL_FORMS').value);
+        if (total > 1) {
+            btn.closest('.form-row').remove();
+            const forms = document.querySelectorAll('.form-row');
+            document.getElementById('id_' + prefix + '-TOTAL_FORMS').value = forms.length;
+            forms.forEach((form, index) => {
+                form.querySelectorAll('input').forEach(function(input) {
+                    updateElementIndex(input, prefix, index);
+                });
+            });
+        }
+        return false;
+    }
+    
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('add-form-row')) {
+            e.preventDefault();
+            cloneMore('.form-row:last-child', 'form');
+        } else if (e.target.classList.contains('remove-form-row')) {
+            e.preventDefault();
+            deleteForm('form', e.target);
+        }
+    });
+    
+</script>
+
+{% endblock %}
