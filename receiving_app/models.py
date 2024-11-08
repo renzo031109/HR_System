@@ -54,9 +54,10 @@ class Staff_Record(models.Model):
     department = models.ForeignKey(Department, on_delete=models.CASCADE)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     component = models.ForeignKey(Component, on_delete=models.CASCADE)
+    date = models.DateField(auto_now_add=True)
 
     class Meta:
-        ordering = ["last_name"]
+        ordering = ["date"]
 
     def __str__(self):
         return self.last_name

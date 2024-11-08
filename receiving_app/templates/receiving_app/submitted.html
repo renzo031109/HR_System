@@ -1,0 +1,25 @@
+{% extends 'base.html'  %}
+
+{% load static %}
+
+{% block title %}
+Thank You
+{% endblock title %}
+
+
+{% block content %}
+
+<div class="card text-center mt-5 pb-5 shadow fade show">
+    <div class="card-body">
+      <img src="{% static 'media/checkmark.png' %}" width="20%">
+      <br>
+      <h3 class="text-success">Awesome!</h3>
+      <h1>Submitted successfully</h1>
+      <br><br>
+      <p class="card-title">Your details has been submitted successfully</p>
+      <p class="card-text"></p>
+      <a href="{% url 'add_record' %}" class="btn btn-primary">Go to Homepage</a>
+    </div>
+  </div>
+
+{% endblock content %}

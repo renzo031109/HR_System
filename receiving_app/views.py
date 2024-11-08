@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Staff_Record, Client, Department
 from .forms import ReceivedModelFormSet
 
@@ -35,9 +35,15 @@ def add_record(request):
                     received_formset.department = department
                     received_formset.save()
 
+                    return redirect('submitted')
+
     else:
         formset = ReceivedModelFormSet(queryset=Staff_Record.objects.none())
 
     context = {'formset': formset}
     return render(request, 'receiving_app/add_record.html', context)
+
+
+def submitted(request):
+    return render(request, 'receiving_app/submitted.html')
  

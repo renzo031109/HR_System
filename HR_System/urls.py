@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.summary_released, name='summary_received'),
     path('add_record/', views.add_record, name='add_record'),
+    path('submitted/', views.submitted, name='submitted'),
 ]
