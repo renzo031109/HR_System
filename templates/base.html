@@ -16,9 +16,11 @@
     <!-- Select2 css -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
-    <title>S360 IS | {% block title %} {% endblock title %}</title>
+    <title>S360 HR System | {% block title %} {% endblock title %}</title>
   </head>
   <body>
+
+    {% include 'navbar.html' %}
 
 
     <div class="container-fluid">
@@ -26,12 +28,11 @@
       {% block content %}
       {% endblock content %}
 
-
     </div>
 
     <footer class="pt-1">
       <div id="myfooter">
-      <p>© 2024 Shore360, Inc. | S360 OPERATIONS' SUPPLIES by IT Projects Team. All rights reserved. </p>
+      <p>© 2024 Shore360, Inc. | S360 HR System by IT Projects Team. All rights reserved. </p>
       </div>
     </footer>
 

@@ -1,0 +1,22 @@
+footer{ 
+    background-color: #FFF;
+    font-size: small;
+    position: fixed;
+    bottom: 0px;
+    width: 400px;
+    text-align: center;
+    width: 100%;
+    } /* one-line vertical centering */
+
+
+/* User greetings */
+#hi-name{
+    color: white;
+    padding-top: 7px;
+    padding-left: 12px;
+    padding-right: 10px;
+ }
+ 
+ body{
+    background-color: #ebeff5;
+ }

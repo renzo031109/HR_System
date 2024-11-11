@@ -17,11 +17,14 @@ RELEASED ITEM FORM
     {% csrf_token %}
     {{ formset.management_form }}
 
+    <div class="get-item-title mb-5"><center><h3>HR RELEASED FORM</h3></center></div>
+
+    <div class="border px-3 pb-3 pt-2">
+
       <div class="row">
 
-        <div class="get-item-title mb-5"><center><h3>RELEASED ITEM FORM</h3></center></div>
-   
         {% for form in formset %}
+        
         <div class="col">
           {{ form.employee_id.label_tag }}
           {{ form.employee_id}}
@@ -56,6 +59,7 @@ RELEASED ITEM FORM
           {{ form.department }}
         </div>
       </div>
+    </div>
 
         {% endfor %}
       
@@ -65,7 +69,7 @@ RELEASED ITEM FORM
           <table class="table table-bordered table-hover mt-4">
               <thead>
                 <tr>           
-                    <th scope="col" style="width:90%"><strong>I have received the following from the HR Department: </strong></th>
+                    <th scope="col" style="width:90%"><h4><i>I have received the following from the HR Department: </i></h4></th>
                     <th scope="col"></th>
                 </tr>
               </thead>
@@ -95,6 +99,7 @@ RELEASED ITEM FORM
   </div>
 </div>
 </div>
+
 
 <!-- Call the script for the formset -->
 {% include 'receiving_app/form_script.html' %}

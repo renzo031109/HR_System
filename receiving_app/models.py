@@ -48,16 +48,16 @@ class Component(models.Model):
         
 
 class Staff_Record(models.Model):
-    employee_id = models.IntegerField()
-    last_name = models.CharField(max_length=200)
-    first_name = models.CharField(max_length=200)
-    department = models.ForeignKey(Department, on_delete=models.CASCADE)
-    client = models.ForeignKey(Client, on_delete=models.CASCADE)
-    component = models.ForeignKey(Component, on_delete=models.CASCADE)
-    date = models.DateField(auto_now_add=True)
+    employee_id = models.IntegerField(null=True, blank=True)
+    last_name = models.CharField(max_length=200, null=True, blank=True)
+    first_name = models.CharField(max_length=200, null=True, blank=True)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, null=True, blank=True)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, null=True, blank=True)
+    component = models.ForeignKey(Component, on_delete=models.CASCADE, null=True, blank=True)
+    date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ["date"]
+        ordering = ["-date"]
 
     def __str__(self):
         return self.last_name
