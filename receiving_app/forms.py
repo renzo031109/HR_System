@@ -1,12 +1,12 @@
 from django import forms
 from django.forms import modelformset_factory
-from .models import Staff_Record
+from .models import Employee_Record
 
 class ReceivedForm(forms.ModelForm):
 
     class Meta:
 
-        model = Staff_Record
+        model = Employee_Record
 
         fields = [
             'employee_id',
@@ -30,7 +30,7 @@ class ReceivedForm(forms.ModelForm):
 
             'employee_id': forms.TextInput(attrs={
                 'class':'form-control',
-                'placeholder': '0',
+                'placeholder': 'XXXXXX',
                 'autocomplete': 'off',
                 'required':True
             }),
@@ -58,5 +58,5 @@ class ReceivedForm(forms.ModelForm):
         }
 
 # modelformset functions
-ReceivedModelFormSet = modelformset_factory(Staff_Record, form=ReceivedForm, extra=1) 
+ReceivedModelFormSet = modelformset_factory(Employee_Record, form=ReceivedForm, extra=1) 
 

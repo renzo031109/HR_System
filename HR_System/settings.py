@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from django.contrib import messages
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,7 +27,7 @@ SECRET_KEY = 'django-insecure-mt3sho+#oo!dc=e82w(v^xg7k)7eua@@6y5le91_-*5m3b_n#3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -151,3 +152,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # set default login
 LOGIN_REDIRECT_URL = 'add_record'
 LOGIN_URL = 'user-login'
+
+# Message Tags for Bootstrap
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-info',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+}
+
+#Add comma separator on thousands value
+USE_THOUSAND_SEPARATOR = True
+

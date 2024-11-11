@@ -23,6 +23,16 @@
     {% include 'navbar.html' %}
 
 
+    {% for message in messages %}
+    <div class="alert {{ message.tags }} alert-dismissible shadow fade show" data-bs-dismiss="alert" role="alert">
+        <button type="button" class="btn btn-alert-message {{ message.tags }}" data-dismiss="alert" aria-label="Close" id="btn-alert-message">
+            <span aria-hidden="true">&times;</span>
+        </button> 
+        <span>&nbsp&nbsp</span>{{ message | safe }}
+    </div>
+    {% endfor %}
+
+
     <div class="container-fluid">
 
       {% block content %}

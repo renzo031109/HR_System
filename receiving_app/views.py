@@ -1,13 +1,28 @@
 from django.shortcuts import render, redirect
-from .models import Staff_Record, Client, Department, Component
+from .models import Employee_Record, Client, Department, Component
 from .forms import ReceivedModelFormSet
-
+from .filters import EmployeeRecordFilter
+from django.contrib import messages
 
 
 # Create your views here.
 def summary_released(request):
-    records = Staff_Record.objects.all()
-    context = {'records': records}
+    records = Employee_Record.objects.all()
+
+    records_Filter = EmployeeRecordFilter(request.GET, queryset=records)
+    records = records_Filter.qs
+    records_count = records.count()
+
+    if records_count > 0:
+        messages.info(request, f"Found '{records_count}' record(s) in the database")
+    else:
+        messages.info(request, f"Record not Found in the database ")
+
+    context = {
+        'records': records,
+        'records_count': records_count,
+        'records_Filter': records_Filter
+        }
     return render(request, 'receiving_app/summary_report.html', context)
 
 
@@ -58,7 +73,7 @@ def add_record(request):
             return redirect('submitted')
 
     else:
-        formset = ReceivedModelFormSet(queryset=Staff_Record.objects.none())
+        formset = ReceivedModelFormSet(queryset=Employee_Record.objects.none())
 
     context = {'formset': formset}
     return render(request, 'receiving_app/add_record.html', context)
@@ -73,9 +88,8 @@ def dashboard(request):
  
 
 def delete_employee(request, id):
-    print(id)
     if request.method == 'POST':
-        employee = Staff_Record.objects.get(id=id)
+        employee = Employee_Record.objects.get(id=id)
 
         employee.delete()
     return redirect('summary_received')

@@ -47,8 +47,8 @@ class Component(models.Model):
 
         
 
-class Staff_Record(models.Model):
-    employee_id = models.IntegerField(null=True, blank=True)
+class Employee_Record(models.Model):
+    employee_id = models.CharField(max_length=50, null=True, blank=True)
     last_name = models.CharField(max_length=200, null=True, blank=True)
     first_name = models.CharField(max_length=200, null=True, blank=True)
     department = models.ForeignKey(Department, on_delete=models.CASCADE, null=True, blank=True)
@@ -66,4 +66,4 @@ class Staff_Record(models.Model):
     def save(self):
         self.last_name = self.last_name.upper()
         self.first_name = self.first_name.upper()
-        super(Staff_Record, self).save()  
+        super(Employee_Record, self).save()  
