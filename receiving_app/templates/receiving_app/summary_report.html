@@ -30,6 +30,7 @@ RECEIPT LOGS
         <th scope="col">{% anchor client _("CLIENT") %}</th>
         <th scope="col">{% anchor department _("DEPARTMENT") %}</th>
         <th scope="col">{% anchor component _("RECEIVED") %}</th>
+        <th scope="col">{% anchor others _("OTHERS") %}</th>
         <th scope="col">{% anchor date _("DATE") %}</th>
         <th scope="col"></th>
 
@@ -45,6 +46,7 @@ RECEIPT LOGS
         <td>{{ record.client }}</td>
         <td>{{ record.department }}</td>
         <td>{{ record.component }}</td>     
+        <td>{{ record.others }}</td> 
         <td>{{ record.date }}</td>      
         <td>
           <center>

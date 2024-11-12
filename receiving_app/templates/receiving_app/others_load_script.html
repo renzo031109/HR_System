@@ -1,0 +1,16 @@
+
+<script type="text/javascript">
+    counter=0;
+    document.addEventListener('DOMContentLoaded', function() {
+        const siteField = document.getElementById('id_form-${counter}-component');
+        let counter = 1; // Start counter for incrementing IDs
+
+        siteField.addEventListener('change', function() {
+            // Increment the counter 
+            counter++;
+            alert('hello',counter)
+    
+        });
+    });
+
+</script>

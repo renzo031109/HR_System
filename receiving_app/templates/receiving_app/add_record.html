@@ -63,21 +63,30 @@ RELEASED ITEM FORM
 
         {% endfor %}
       
-        <br> 
+        <br>
+        <br>  
+      
+      <div class="row">
+        <div class="col">
+          <h4><i>I have received the following from the HR Department: </i></h4>
+        </div>
+      </div> 
 
       <div class="row">
           <table class="table table-bordered table-hover mt-4">
               <thead>
                 <tr>           
-                    <th scope="col" style="width:90%"><h4><i>I have received the following from the HR Department: </i></h4></th>
-                    <th scope="col"></th>
-                </tr>
+                  <th scope="col" style="width:50%">DESCRIPTION</th>
+                  <th scope="col">OTHERS</th>
+                  <th scope="col"></th>
+              </tr>
               </thead>
               <tbody class="form-row spacer">
                   {% for item in formset %}
                   <tr> 
                   
                     <td>{{ item.component}}</td>
+                    <td>{{ item.others }}</td>
                     
                     <td><center><button type="button" class="btn btn-success add-form-row">+</button></center></td>
                     
@@ -103,5 +112,8 @@ RELEASED ITEM FORM
 
 <!-- Call the script for the formset -->
 {% include 'receiving_app/form_script.html' %}
+
+<!-- Call the script for the load others -->
+{% include 'receiving_app/others_load_script.html' %}
 
 {% endblock %}

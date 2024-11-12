@@ -14,7 +14,8 @@ class ReceivedForm(forms.ModelForm):
             'first_name',
             'department',
             'client',
-            'component'
+            'component',
+            'others'
         ]
 
         labels = {
@@ -23,7 +24,8 @@ class ReceivedForm(forms.ModelForm):
             'first_name' : 'FIRST NAME',
             'department' : 'DEPARTMENT',
             'client' : 'CLIENT',
-            'component' : 'ITEM'
+            'component' : 'ITEM',
+            'others': 'OTHERS'
         }
 
         widgets = {
@@ -49,9 +51,16 @@ class ReceivedForm(forms.ModelForm):
             }),
             'client': forms.Select(attrs={
                 'class':'form-control', 
+                'required':True
             }),
             'component': forms.Select(attrs={
                 'class':'form-control', 
+                'required':True,
+            }),
+            'others': forms.TextInput(attrs={
+                'class':'form-control',
+                'placeholder': '*** Type here if not found in the description ***',
+                'autocomplete': 'off',
             }),
 
 
