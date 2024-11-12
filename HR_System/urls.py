@@ -27,6 +27,7 @@ urlpatterns = [
     path('submitted/', received_views.submitted, name='submitted'),
     path('dashboard', received_views.dashboard, name='dashboard'),
     path('delete_employee/<str:id>/', received_views.delete_employee, name = 'delete_employee'),
+    path('export_excel_record/', received_views.export_excel_record, name='export_excel_record'),
 
     path('register/', user_view.register, name='user-register'),
     path('login/', auth_views.LoginView.as_view(template_name='user/login.html'), name='user-login'),

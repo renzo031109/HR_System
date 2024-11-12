@@ -55,6 +55,7 @@ class Employee_Record(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE, null=True, blank=True)
     component = models.ForeignKey(Component, on_delete=models.CASCADE, null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)
+    others = models.CharField(max_length=200, null=True, blank=True) 
 
     class Meta:
         ordering = ["-date"]
