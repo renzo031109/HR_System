@@ -19,13 +19,14 @@ from django.urls import path
 from receiving_app import views as received_views
 from django.contrib.auth import views as auth_views
 from user import views as user_view
+from dashboard import views as dashboard_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', received_views.summary_released, name='summary_received'),
     path('add_record/', received_views.add_record, name='add_record'),
     path('submitted/', received_views.submitted, name='submitted'),
-    path('dashboard', received_views.dashboard, name='dashboard'),
+    path('dashboard/', dashboard_views.dashboard, name='dashboard'),
     path('delete_employee/<str:id>/', received_views.delete_employee, name = 'delete_employee'),
     path('export_excel_record/', received_views.export_excel_record, name='export_excel_record'),
 

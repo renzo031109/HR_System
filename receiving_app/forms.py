@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import modelformset_factory
-from .models import Employee_Record
+from .models import Employee_Record, Component
 
 class ReceivedForm(forms.ModelForm):
 
@@ -55,17 +55,20 @@ class ReceivedForm(forms.ModelForm):
             }),
             'component': forms.Select(attrs={
                 'class':'form-control', 
-                'required':True,
             }),
             'others': forms.TextInput(attrs={
                 'class':'form-control',
                 'placeholder': '*** Type here if not found in the description ***',
                 'autocomplete': 'off',
             }),
-
-
         }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['component'].empty_label = "***OTHERS***"
+
+
+    
 # modelformset functions
 ReceivedModelFormSet = modelformset_factory(Employee_Record, form=ReceivedForm, extra=1) 
 

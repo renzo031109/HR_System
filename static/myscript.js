@@ -5,3 +5,12 @@ document.querySelectorAll(".nav-link").forEach((link) => {
         link.setAttribute("aria-current", "page");
     }
 });
+
+
+//  Spinner script
+$('#spinner').hide();
+
+
+$('#submitbtn').click(function(){
+    $('#spinner').show();
+}) 

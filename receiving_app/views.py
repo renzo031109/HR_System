@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Employee_Record, Client, Department, Component
+from .models import Employee_Record, Client, Department, Component, Statistics
 from .forms import ReceivedModelFormSet
 from .filters import EmployeeRecordFilter
 from django.contrib import messages
@@ -58,37 +58,53 @@ def add_record(request):
         if formset.is_valid():
             for form in formset:
 
-                #check if employee id is not null
-                if form.cleaned_data.get('component'):
-                    #assign input value to variables
-                    add_client = form.cleaned_data.get('client')
-                    add_department = form.cleaned_data.get('department')
-                    add_employee_id = form.cleaned_data.get('employee_id')
-                    add_first_name = form.cleaned_data.get('first_name')
-                    add_last_name = form.cleaned_data.get('last_name')
+                #assign input value to variables
+                add_client = form.cleaned_data.get('client')
+                add_department = form.cleaned_data.get('department')
+                add_employee_id = form.cleaned_data.get('employee_id')
+                add_first_name = form.cleaned_data.get('first_name')
+                add_last_name = form.cleaned_data.get('last_name')
 
 
-                    try:
-                        #assign value to foreign keys
-                        client = Client.objects.get(client=add_client)
-                        department = Department.objects.get(department=add_department)
-                    except:
-                        pass
+                try:
+                    #assign value to foreign keys
+                    client = Client.objects.get(client=add_client)
+                    department = Department.objects.get(department=add_department)
 
-                    #hold the first value to a list
-                    employee_id_list.append(add_employee_id)
-                    first_name_list.append(add_first_name)
-                    last_name_list.append(add_last_name)
+                except:
+                    pass
+
+                #hold the first value to a list
+                employee_id_list.append(add_employee_id)
+                first_name_list.append(add_first_name)
+                last_name_list.append(add_last_name)
 
 
-                    received_formset = form.save(commit=False)
-                    received_formset.client = client
+                received_formset = form.save(commit=False)
+                received_formset.client = client            
+                received_formset.employee_id = employee_id_list[0]
+                received_formset.first_name = first_name_list[0]
+                received_formset.last_name = last_name_list[0]
+
+                #check if component value is null
+                if not form.cleaned_data.get('component'):
+                    component = Component.objects.get(component="OTHERS")
+                    received_formset.component = component
+
+                #check if department value is null
+                if not form.cleaned_data.get('department'):
+                    department = Department.objects.get(department="NONE")
                     received_formset.department = department
-                    received_formset.employee_id = employee_id_list[0]
-                    received_formset.first_name = first_name_list[0]
-                    received_formset.last_name = last_name_list[0]
-                    received_formset.save()
-    
+                else:
+                    received_formset.department = department
+
+
+                received_formset.save()
+
+            #Count each transaction per employee
+            stats = Statistics(employee=employee_id_list[0], count=1)
+            stats.save()
+
             return redirect('submitted')
 
     else:

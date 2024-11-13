@@ -45,7 +45,7 @@ class Component(models.Model):
         self.component = self.component.upper()
         super(Component, self).save()
 
-        
+      
 
 class Employee_Record(models.Model):
     employee_id = models.CharField(max_length=50, null=True, blank=True)
@@ -68,3 +68,13 @@ class Employee_Record(models.Model):
         self.last_name = self.last_name.upper()
         self.first_name = self.first_name.upper()
         super(Employee_Record, self).save()  
+
+
+
+class Statistics(models.Model):
+    employee = models.CharField(max_length=50, null=True, blank=True) 
+    count = models.IntegerField(null=True)
+    date = models.DateField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.employee
