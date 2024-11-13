@@ -97,7 +97,7 @@ def add_record(request):
                     received_formset.department = department
                 else:
                     received_formset.department = department
-
+             
 
                 received_formset.save()
 

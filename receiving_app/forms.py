@@ -55,6 +55,7 @@ class ReceivedForm(forms.ModelForm):
             }),
             'component': forms.Select(attrs={
                 'class':'form-control', 
+                'required':True
             }),
             'others': forms.TextInput(attrs={
                 'class':'form-control',
@@ -65,10 +66,9 @@ class ReceivedForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['component'].empty_label = "***OTHERS***"
+        self.fields['component'].empty_label = None
 
 
-    
 # modelformset functions
 ReceivedModelFormSet = modelformset_factory(Employee_Record, form=ReceivedForm, extra=1) 
 
