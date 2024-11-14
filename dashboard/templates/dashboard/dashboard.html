@@ -10,37 +10,63 @@ HOME
 <div class="container">
 
 <div class="dasboard-title mt-5 pb-3">
-    <h3>HR DASHBOARD  </h3>
+    <h1><center>HR DASHBOARD</center> </h1>
 </div>
 <div class="container text-center">
     <div class="row">
-      <div class="col-4">
+      <div class="col-6">
         <div class="card text-bg-primary mb-3 shadow fade show">
-            <h5 class="card-header">TOTAL ITEM COUNT</h5>
+            <h5 class="card-header">STAFF COUNT TODAY</h5>
             <div class="card-body">
-              <h1 class="card-title"></h1>
+              <h1 class="card-title">{{ transaction_today }}</h1>
             </div>
           </div>
       </div>
-      <div class="col-4">
-        <div class="card text-bg-danger shadow fade show">
-            <h5 class="card-header ">TOTAL ITEM WITH CRITICAL STOCKS</h5>
+      <div class="col-6">
+        <div class="card text-bg-success shadow fade show">
+            <h5 class="card-header ">STAFF COUNT THIS MONTH</h5>
             <div class="card-body">
-                <h1 class="card-title"></h1>
+                <h1 class="card-title">{{ transaction_month }}</h1>
             </div>
           </div>
-      </div>
-      <div class="col-4">
-        <div class="card text-bg-warning mb-3 shadow fade show ">
-            <h5 class="card-header">TRANSACTION TODAY</h5>
-            <div class="card-body">
-                <h1 class="card-title"></h1>
-            </div>
-          </div>
-      </div>
-      
+      </div>     
     </div>
 </div>
 
 
+<div class="dasboard-title mt-5 pb-3">
+  <h3>ITEM RELEASED TODAY: </h3>
+</div>
+
+<div class="row">
+  <div class="col-12">
+
+        <div class="card card-body shadow fade show">
+
+          <table class="table table-bordered table-hover table-striped">
+                <thead class="table-primary">
+                  <tr>
+                    <th scope="col">ITEM RELEASED</th>
+                    <th scope="col">COUNT</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for item in component_stat %}
+                  <tr>
+                    <td>{{ item.component__component }}</td>
+                    <td>{{ item.total_count }}</td>
+                  </tr>
+                  {% empty %}
+                  <td>There has been no availment today so far.</td>
+                  {% endfor %}
+            
+                </tbody>
+              </table>
+
+        </div>
+
+  </div>
+</div>
+
+ 
 {% endblock content %}

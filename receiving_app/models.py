@@ -56,6 +56,7 @@ class Employee_Record(models.Model):
     component = models.ForeignKey(Component, on_delete=models.CASCADE, null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)
     others = models.CharField(max_length=200, null=True, blank=True) 
+    count = models.IntegerField(null=True)
 
     class Meta:
         ordering = ["-date"]
@@ -74,7 +75,13 @@ class Employee_Record(models.Model):
 class Statistics(models.Model):
     employee = models.CharField(max_length=50, null=True, blank=True) 
     count = models.IntegerField(null=True)
-    date = models.DateField(auto_now_add=True)
+    date = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
         return self.employee
+    
+
+class Component_Statistics(models.Model):
+    component = models.CharField(max_length=200, null=True)
+    count = models.IntegerField(null=True)
+    date_component = models.DateTimeField(auto_now_add=True)

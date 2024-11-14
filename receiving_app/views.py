@@ -5,6 +5,7 @@ from .filters import EmployeeRecordFilter
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from django.contrib.admin.views.decorators import staff_member_required
 import os
 
 #for export excel imports
@@ -16,6 +17,7 @@ from urllib.parse import quote
 
 
 # Create your views here.
+@staff_member_required
 @login_required
 def summary_released(request):
     records = Employee_Record.objects.all()
@@ -79,12 +81,16 @@ def add_record(request):
                 first_name_list.append(add_first_name)
                 last_name_list.append(add_last_name)
 
+                #assign to each form
+                count = 1
 
+                #assign value to fields
                 received_formset = form.save(commit=False)
                 received_formset.client = client            
                 received_formset.employee_id = employee_id_list[0]
                 received_formset.first_name = first_name_list[0]
                 received_formset.last_name = last_name_list[0]
+                received_formset.count = count
 
                 #check if component value is null
                 if not form.cleaned_data.get('component'):
@@ -113,17 +119,17 @@ def add_record(request):
     context = {'formset': formset}
     return render(request, 'receiving_app/add_record.html', context)
 
-
+@staff_member_required
 @login_required
 def submitted(request):
     return render(request, 'receiving_app/submitted.html')
 
-
+@staff_member_required
 @login_required
 def dashboard(request):
     return render(request, 'receiving_app/dashboard.html')
  
-
+@staff_member_required
 @login_required
 def delete_employee(request, id):
     if request.method == 'POST':
@@ -132,7 +138,7 @@ def delete_employee(request, id):
         employee.delete()
     return redirect('summary_received')
 
-
+@staff_member_required
 @login_required
 def export_excel_record(request):
 

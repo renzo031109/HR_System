@@ -66,7 +66,7 @@ class ReceivedForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['component'].empty_label = None
+        # self.fields['component'].empty_label = None
 
 
 # modelformset functions
