@@ -1,13 +1,15 @@
 
 <!-- Search Modal -->
-<div class="modal fade bd-example-modal-md" id="search" role="dialog" tabindex="-1" aria-labelledby="searchLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+<div class="modal fade bd-example-modal-lg" id="search" role="dialog" tabindex="-1" aria-labelledby="searchLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
       <div class="modal-content">
           <div class="modal-header text-bg-primary">
               <h5 class="modal-title" id="searchLabel">FILTER BY</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
+          
           <div class="modal-body">
+            <hr>
               <form action="" method="get" class="form">
                   <!-- Form Fields with spacing -->
                   <div class="form-group">
@@ -44,11 +46,13 @@
                       {{ records_Filter.form.date_to }}
                     </div>
                 </div>
+                <hr>
                   <!-- Add more fields as necessary -->
                   <div class="d-flex justify-content-end mt-3">
                       <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">CANCEL</button>
                       <button class="btn btn-primary" type="submit">SEARCH</button>
                   </div>
+           
               </form>
           </div>
       </div>
