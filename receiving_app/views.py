@@ -74,7 +74,8 @@ def add_record(request):
                     department = Department.objects.get(department=add_department)
 
                 except:
-                    pass
+                    department = Department.objects.get(department="NONE")
+
 
                 #hold the first value to a list
                 employee_id_list.append(add_employee_id)
@@ -91,18 +92,19 @@ def add_record(request):
                 received_formset.first_name = first_name_list[0]
                 received_formset.last_name = last_name_list[0]
                 received_formset.count = count
+                received_formset.department = department
 
                 #check if component value is null
                 if not form.cleaned_data.get('component'):
                     component = Component.objects.get(component="OTHERS")
                     received_formset.component = component
 
-                #check if department value is null
-                if not form.cleaned_data.get('department'):
-                    department = Department.objects.get(department="NONE")
-                    received_formset.department = department
-                else:
-                    received_formset.department = department
+                # #check if department value is null
+                # if not form.cleaned_data.get('department'):
+                #     department = Department.objects.get(department="NONE")
+                #     received_formset.department = department
+                # else:
+                #     received_formset.department = department
              
 
                 received_formset.save()
