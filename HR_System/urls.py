@@ -23,8 +23,8 @@ from dashboard import views as dashboard_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', received_views.summary_released, name='summary_received'),
-    path('add_record/', received_views.add_record, name='add_record'),
+    path('', received_views.add_record, name='add_record'),
+    path('summary/', received_views.summary_released, name='summary_received'),
     path('submitted/', received_views.submitted, name='submitted'),
     path('dashboard/', dashboard_views.dashboard, name='dashboard'),
     path('delete_employee/<str:id>/', received_views.delete_employee, name = 'delete_employee'),

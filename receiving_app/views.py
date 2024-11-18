@@ -17,7 +17,7 @@ from urllib.parse import quote
 
 
 # Create your views here.
-@staff_member_required
+
 @login_required
 def summary_released(request):
     records = Employee_Record.objects.all()
@@ -121,17 +121,17 @@ def add_record(request):
     context = {'formset': formset}
     return render(request, 'receiving_app/add_record.html', context)
 
-@staff_member_required
+
 @login_required
 def submitted(request):
     return render(request, 'receiving_app/submitted.html')
 
-@staff_member_required
+
 @login_required
 def dashboard(request):
     return render(request, 'receiving_app/dashboard.html')
  
-@staff_member_required
+
 @login_required
 def delete_employee(request, id):
     if request.method == 'POST':
@@ -140,7 +140,7 @@ def delete_employee(request, id):
         employee.delete()
     return redirect('summary_received')
 
-@staff_member_required
+
 @login_required
 def export_excel_record(request):
 
