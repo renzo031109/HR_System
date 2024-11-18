@@ -69,5 +69,41 @@ HOME
   </div>
 </div>
 
+
+<div class="dasboard-title mt-5 pb-3">
+  <h3>ITEM RELEASED MTD: </h3>
+</div>
+
+<div class="row">
+  <div class="col-12">
+
+        <div class="card card-body shadow fade show">
+
+          <table class="table table-bordered table-hover table-striped">
+                <thead class="table-primary">
+                  <tr>
+                    <th scope="col">ITEM RELEASED</th>
+                    <th scope="col">COUNT</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for item in component_stat_month %}
+                  <tr>
+                    <td>{{ item.component__component }}</td>
+                    <td>{{ item.total_count }}</td>
+                  </tr>
+                  {% empty %}
+                  <td>There has been no availment today so far.</td>
+                  <td></td>
+                  {% endfor %}
+            
+                </tbody>
+              </table>
+
+        </div>
+
+  </div>
+</div>
+
  
 {% endblock content %}

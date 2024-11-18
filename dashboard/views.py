@@ -12,45 +12,89 @@ from openpyxl.styles import *
 
 
 
-def dashboard(request):
+# def dashboard(request):
+#     # Get the current date, month, and year
+#     now = datetime.datetime.now()
+#     current_year = now.year
+#     current_month = now.month
+#     today = now.date()
 
-    stat = Statistics.objects.all()
+#     # Calculate today's transactions
+#     transaction_today = Statistics.objects.filter(date__date=today).count()
+
+#     # Calculate monthly transactions
+#     transaction_month = Statistics.objects.filter(date__year=current_year, date__month=current_month).count()
+
+#     # Get the list of monthly records 
+#     monthly_records = Statistics.objects.filter(date__year=current_year, date__month=current_month)
+
+#     # Group components and count released items for today
+#     component_stat = (Employee_Record.objects
+#                       .filter(date__date=today)
+#                       .values('component__component')
+#                       .annotate(total_count=Sum('count'))
+#                       .order_by('-total_count'))
 
     
-                 
-    # Get the current month and year
+#     component_sta_month = (Employee_Record.objects
+#                       .filter(date__date=monthly_records)
+#                       .values('component__component')
+#                       .annotate(total_count=Sum('count'))
+#                       .order_by('-total_count'))
+
+
+
+
+#     context = {
+#         'transaction_month': transaction_month,
+#         'transaction_today': transaction_today,
+#         'component_stat': component_stat,
+#         'component_sta_month': component_sta_month
+#     }
+
+#     return render(request, 'dashboard/dashboard.html', context)
+
+
+
+def dashboard(request):
+    # Get the current date, month, and year
     now = datetime.datetime.now()
     current_year = now.year
     current_month = now.month
+    today = now.date()
 
-    today = datetime.datetime.now().date()
+    # Calculate today's transactions
+    transaction_today = Statistics.objects.filter(date__date=today).count()
 
-    #Transaction today summary
-    transaction_today = 0
-    for transaction_date in stat:
-        if transaction_date.date.date() == datetime.datetime.now().date():
-            transaction_today += 1
+    # Calculate monthly transactions
+    transaction_month = Statistics.objects.filter(date__year=current_year, date__month=current_month).count()
 
+    # Get the list of monthly records
+    monthly_records = Statistics.objects.filter(date__year=current_year, date__month=current_month)
 
-    # Filter for records in the current month
-    stat = Statistics.objects.filter(date__year=current_year, date__month=current_month)
-    transaction_month = stat.count()
-
-
-    #This will group component and count released items today
-    #componen__component will get the values of the field
+    # Group components and count released items for today
     component_stat = (Employee_Record.objects
                       .filter(date__date=today)
                       .values('component__component')
                       .annotate(total_count=Sum('count'))
-                      .order_by('-total_count')
-                    )
+                      .order_by('-total_count'))
+
+    # Group components and count released items for the current month
+    component_stat_month = (Employee_Record.objects
+                            .filter(date__year=current_year, date__month=current_month)
+                            .values('component__component')
+                            .annotate(total_count=Sum('count'))
+                            .order_by('-total_count'))
 
     context = {
-
         'transaction_month': transaction_month,
         'transaction_today': transaction_today,
-        'component_stat': component_stat
+        'component_stat': component_stat,
+        'component_stat_month': component_stat_month
     }
 
     return render(request, 'dashboard/dashboard.html', context)
+
+
+
+
